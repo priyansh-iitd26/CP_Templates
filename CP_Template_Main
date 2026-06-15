@@ -1,25 +1,57 @@
+/*
+ Bit Manipulation
+ * - Check if power of 2:    (n > 0 && (n & (n - 1)) == 0)
+ * - Clear lowest set bit:   n & (n - 1)
+ * - Get lowest set bit:     n & -n
+ * - Check if i-th bit set:  (n & (1LL << i)) != 0
+ * - Set i-th bit:           n | (1LL << i)
+ * - Clear i-th bit:         n & ~(1LL << i)
+ * - Toggle i-th bit:        n ^ (1LL << i)
+ */
+
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
 #define ll long long
 #define ld long double
 #define MOD 1000000007
-/*-----------------------------------------------------------------------------------------*/
-ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
-vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
+
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-ll getRandomNumber(ll l, ll r) {return uniform_int_distribution<ll>(l, r)(rng);}
-/*-----------------------------------------------------------------------------------------*/
-void solve() {
+int getRandomNumber(int l, int r) {return uniform_int_distribution<int>(l, r)(rng);}
+
+int power(int a, int x) {
+    int result = 1;
+    while(x > 0){
+        if(x & 1) result = (result * a) % MOD;
+        a = (a * a) % MOD;
+        x >>= 1;
+    }
+    return result;
+}
+
+int multiply(int x, int y){
+    return (x * 1LL * y) % MOD;
+}
+
+int modInverse(int n){
+    return power(n, MOD - 2);
+}
+
+int divide(int x, int y){
+    return multiply(x, power(y, MOD - 2));
+}
+
+void solve(){
     
 }
-signed main() {
+
+signed main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
     int tc;
     cin >> tc;
-    while(tc--) {
+    while(tc--){
         solve();
     }
     return 0;
